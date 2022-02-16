@@ -44,7 +44,7 @@ int tarGetNum(char *bin, int *num)
 
     /* nameフィールドがNULL文字でなくなるまでブロックを数える */
     while(head->name[0] != '\0'){
-        size = atoi(head->size);
+        size = strtol(head->size, NULL, 8);
         if (size % TAR_DATA_ALIGN != 0)
             align = 1;
         /* データは512バイトでアラインメントされるので、余りがあるなら+512バイト */
@@ -80,7 +80,7 @@ int tarGetOffset(char *bin, char **offset)
     while(head->name[0] != '\0'){
         offset[i] = block;
 
-        size = atoi(head->size);
+        size = strtol(head->size, NULL, 8);
         if (size % TAR_DATA_ALIGN != 0)
             align = 1;
         /* データは512バイトでアラインメントされるので、余りがあるなら+512バイト */
